@@ -1,0 +1,14 @@
+numpy==1.23.5
+jax==0.4.13
+jaxlib==0.4.13
+tensorflow==2.12.0
+opencv-python
+onnxruntime
+insightface==0.7.3
+Pillow
+gradio==4.25.0
+gfpgan
+basicsr
+torch==2.0.1
+torchvision==0.15.2
+gdown

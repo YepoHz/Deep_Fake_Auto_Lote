@@ -1,3 +1,4 @@
+
 import os
 import cv2
 from insightface.app import FaceAnalysis
@@ -21,7 +22,7 @@ def setup_models(execution_provider="cpu"):
 
     if enhancer is None:
         enhancer = GFPGANer(
-            model_path="gfpgan/weights/GFPGANv1.4.pth",
+            model_path="gfpgan/weights/GFPGANv1.4.pth",  # Modelo local
             upscale=1,
             arch="clean",
             channel_multiplier=2,
@@ -52,14 +53,14 @@ def run_swap(target_path, source_path, output_path, execution_provider="cpu", fr
         target_img = swapper.get(target_img, face, source_face, paste_back=True)
 
     if "face_enhancer" in frame_processors:
-        h, w = target_img.shape[:2]
+        h, w = target_img.shape[:2]  # Guardar dimensiones originales
         _, _, enhanced_img = enhancer.enhance(
             target_img,
             has_aligned=False,
             only_center_face=False
         )
+        # Devolver imagen restaurada a tamaño original
         target_img = cv2.resize(enhanced_img, (w, h), interpolation=cv2.INTER_CUBIC)
 
     cv2.imwrite(output_path, target_img)
     return True
-
